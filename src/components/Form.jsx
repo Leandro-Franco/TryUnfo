@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Form extends React.Component {
+class Form extends React.Component {
   render() {
     const {
       cardName,
@@ -11,7 +12,7 @@ export default class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo,
+      // hasTrunfo,
       isSaveButtonDisabled,
       onInputChange,
       onSaveButtonClick,
@@ -106,7 +107,7 @@ export default class Form extends React.Component {
             >
               <option value="normal">normal</option>
               <option value="raro">raro</option>
-              <option value="muito-raro">muito raro</option>
+              <option value="muito raro">muito raro</option>
             </select>
           </label>
           <br />
@@ -115,9 +116,9 @@ export default class Form extends React.Component {
             <input
               type="checkbox"
               name="trunfo-input"
-              value={ cardTrunfo }
+              checked={ cardTrunfo }
               onChange={ onInputChange }
-              id=""
+              id="b"
               data-testid="trunfo-input"
             />
           </label>
@@ -125,8 +126,8 @@ export default class Form extends React.Component {
 
           <button
             type="submit"
-            disable={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
+            disabled={ isSaveButtonDisabled }
             data-testid="save-button"
           >
             Salvar
@@ -139,16 +140,18 @@ export default class Form extends React.Component {
 }
 
 Form.propTypes = {
-  cardName: PropTypes.string,
-  cardDescription: PropTypes.string,
-  cardAttr1: PropTypes.string,
-  cardAttr2: PropTypes.string,
-  cardAttr3: PropTypes.string,
-  cardImage: PropTypes.string,
-  cardRare: PropTypes.string,
-  cardTrunfo: PropTypes.string,
-  hasTrunfo: PropTypes.boolean,
-  isSaveButtonDisabled: PropTypes.boolean,
-  onInputChange: PropTypes.func,
-  onSaveButtonClick: PropTypes.func,
-}.isRequired;
+  cardName: PropTypes.string.isRequired,
+  cardDescription: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
+  cardImage: PropTypes.string.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.string.isRequired,
+  // hasTrunfo: PropTypes.boolean.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
+};
+
+export default Form;
