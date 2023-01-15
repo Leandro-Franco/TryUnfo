@@ -20,11 +20,11 @@ class Card extends React.Component {
         <h2 data-testid="name-card">{cardName}</h2>
         <img src={ cardImage } alt={ cardName } data-testid="image-card" />
         <article data-testid="description-card">{cardDescription}</article>
-        <ol>
+        <ul>
           <li data-testid="attr1-card">{cardAttr1}</li>
           <li data-testid="attr2-card">{cardAttr2}</li>
           <li data-testid="attr3-card">{cardAttr3}</li>
-        </ol>
+        </ul>
         <p data-testid="rare-card">{cardRare}</p>
         {cardTrunfo
           ? <h2 data-testid="trunfo-card">Super Trunfo</h2>
