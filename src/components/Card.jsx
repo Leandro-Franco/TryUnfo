@@ -13,6 +13,7 @@ class Card extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      cards,
     } = this.props;
 
     return (
@@ -29,6 +30,7 @@ class Card extends React.Component {
         {cardTrunfo
           ? <h2 data-testid="trunfo-card">Super Trunfo</h2>
           : null }
+        {cards}
       </section>
 
     );
@@ -44,6 +46,7 @@ Card.propTypes = {
   cardImage: PropTypes.string,
   cardRare: PropTypes.string,
   cardTrunfo: PropTypes.bool,
+  cards: PropTypes.array,
 }.isRequired;
 
 export default Card;

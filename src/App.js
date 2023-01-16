@@ -15,8 +15,8 @@ class App extends React.Component {
     cardRare: 'normal',
     cardTrunfo: false,
     isSaveButtonDisabled: true,
+    cards: [],
   };
-
   // função xtraída da documentação do react
   // validForm = ({ target }) => {
   //  const validate = target.value === '' || target.value <= 0 || target.value >= 0;
@@ -36,6 +36,22 @@ class App extends React.Component {
     });
   };
 
+  saveCard = (event) => {
+    console.log(this.state);
+    this.setState((pState) => ({
+      cards: [...pState.cards, pState],
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: 'normal',
+      cardTrunfo: false,
+    }));
+    event.preventDefault();
+  };
+
   render() {
     const {
       cardName,
@@ -53,8 +69,17 @@ class App extends React.Component {
       <div>
         <h1>Tryunfo</h1>
         <Form
+          cardName={ cardName }
+          cardDescription={ cardDescription }
+          cardAttr1={ cardAttr1 }
+          cardAttr2={ cardAttr2 }
+          cardAttr3={ cardAttr3 }
+          cardImage={ cardImage }
+          cardRare={ cardRare }
+          cardTrunfo={ cardTrunfo }
           onInputChange={ this.handleChange }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          onSaveButtonClick={ this.saveCard }
         />
         <br />
         <p>preview</p>
