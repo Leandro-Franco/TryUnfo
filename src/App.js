@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import Form from './components/Form';
 import Card from './components/Card';
+// import FormValidate from './components/FormValidate';
 
 class App extends React.Component {
   state = {
@@ -13,15 +14,25 @@ class App extends React.Component {
     cardImage: '',
     cardRare: 'normal',
     cardTrunfo: false,
+    isSaveButtonDisabled: true,
   };
+
+  // função xtraída da documentação do react
+  // validForm = ({ target }) => {
+  //  const validate = target.value === '' || target.value <= 0 || target.value >= 0;
+  //     this.setState({
+  //       isSaveButtonDisabled: false,
+  //     });
+  //   }
+  // };
 
   handleChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    console.log(name, value);
-
+    const validate = target.value === '' || target.value <= 0 || target.value >= 0;
     this.setState({
       [name]: value,
+      isSaveButtonDisabled: validate,
     });
   };
 
@@ -35,12 +46,16 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      isSaveButtonDisabled,
     } = this.state;
-
     return (
+
       <div>
         <h1>Tryunfo</h1>
-        <Form onInputChange={ this.handleChange } />
+        <Form
+          onInputChange={ this.handleChange }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
+        />
         <br />
         <p>preview</p>
         <Card
