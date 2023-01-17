@@ -2,7 +2,6 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import Form from './components/Form';
 import Card from './components/Card';
-// import FormValidate from './components/FormValidate';
 
 class App extends React.Component {
   state = {
@@ -95,6 +94,7 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
+      cards,
     } = this.state;
     return (
 
@@ -126,6 +126,22 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <h2>SEU DECK</h2>
+        {
+          cards.map((card) => (
+            <Card
+              key={ card }
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardAttr1={ card.cardAttr1 }
+              cardAttr2={ card.cardAttr2 }
+              cardAttr3={ card.cardAttr3 }
+              cardImage={ card.cardImage }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+            />
+          ))
+        }
       </div>
     );
   }
