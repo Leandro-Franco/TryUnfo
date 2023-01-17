@@ -19,13 +19,17 @@ class App extends React.Component {
     hasTrunfo: false,
   };
 
-  saveCard = (event) => {
-    console.log(this.state);
+  trunfo = () => {
     this.setState(({
       cardTrunfo,
     }) => {
       if (cardTrunfo) { this.setState({ hasTrunfo: true }); }
     });
+  };
+
+  saveCard = (event) => {
+    console.log(this.state);
+    this.trunfo();
     this.setState((pState) => ({
       cards: [...pState.cards, pState],
       cardName: '',
