@@ -41,6 +41,7 @@ class App extends React.Component {
       cardTrunfo: false,
     }));
     event.preventDefault();
+    this.validForm();
   };
 
   handleChange = ({ target }) => {
@@ -82,8 +83,15 @@ class App extends React.Component {
     });
   };
 
-  cardExclude = (a) => {
-    console.log(a);
+  cardExclude = (cardName, cardTrunfo) => {
+    console.log(cardName);
+    const { cards } = this.state;
+    console.log(cards);
+    const newdeck = cards.filter((card) => card.cardName !== cardName);
+    if (cardTrunfo) { this.setState({ hasTrunfo: false }); }
+    this.setState({
+      cards: newdeck,
+    });
   };
 
   render() {
@@ -147,7 +155,8 @@ class App extends React.Component {
               />
               <ExcludeCard
                 cardExclude={ () => this.cardExclude(
-                  card,
+                  card.cardName,
+                  card.cardTrunfo,
                 ) }
               />
             </section>
