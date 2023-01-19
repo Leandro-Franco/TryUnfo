@@ -131,10 +131,12 @@ class App extends React.Component {
     if (checked) {
       this.setState({
         setFilter: filterON,
+        filterTrunfo: true,
       });
     } else {
       this.setState({
         setFilter: cards,
+        filterTrunfo: false,
       });
     }
   };
@@ -152,6 +154,7 @@ class App extends React.Component {
       isSaveButtonDisabled,
       hasTrunfo,
       setFilter,
+      filterTrunfo,
     } = this.state;
     return (
       <div>
@@ -187,6 +190,7 @@ class App extends React.Component {
           type="text"
           onChange={ this.filterCards }
           data-testid="name-filter"
+          disabled={ filterTrunfo }
         />
 
         <select
@@ -194,6 +198,7 @@ class App extends React.Component {
           data-testid="rare-filter"
           defaultValue="todas"
           onClick={ this.filterRarity }
+          disabled={ filterTrunfo }
         >
           <option value="todas">todas</option>
           <option value="normal">normal</option>
@@ -207,6 +212,7 @@ class App extends React.Component {
             type="checkbox"
             onChange={ this.filterTrunfo }
             data-testid="trunfo-filter"
+            checked={ filterTrunfo }
           />
           checando Trunfo
         </label>
