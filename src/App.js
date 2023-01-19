@@ -92,6 +92,7 @@ class App extends React.Component {
     if (cardTrunfo) { this.setState({ hasTrunfo: false }); }
     this.setState({
       cards: newdeck,
+      setFilter: newdeck,
     });
   };
 
