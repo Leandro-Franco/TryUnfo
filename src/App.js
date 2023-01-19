@@ -1,8 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import Form from './components/Form';
 import Card from './components/Card';
 import ExcludeCard from './components/ExcludeCard';
+// import Filter from './components/Filter';
 
 class App extends React.Component {
   state = {
@@ -17,6 +17,8 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
     cards: [],
     hasTrunfo: false,
+    // busca: '',
+    setFilter: [],
   };
 
   trunfo = () => {
@@ -39,6 +41,7 @@ class App extends React.Component {
       cardAttr3: '0',
       cardRare: 'normal',
       cardTrunfo: false,
+      setFilter: [...pState.cards, pState],
     }));
     event.preventDefault();
     this.validForm();
@@ -84,13 +87,21 @@ class App extends React.Component {
   };
 
   cardExclude = (cardName, cardTrunfo) => {
-    console.log(cardName);
     const { cards } = this.state;
-    console.log(cards);
     const newdeck = cards.filter((card) => card.cardName !== cardName);
     if (cardTrunfo) { this.setState({ hasTrunfo: false }); }
     this.setState({
       cards: newdeck,
+    });
+  };
+
+  filterCards = ({ target }) => {
+    const { value } = target;
+    const { cards } = this.state;
+    const filterON = cards
+      .filter((card) => card.cardName.includes(value));
+    this.setState({
+      setFilter: filterON,
     });
   };
 
@@ -107,9 +118,10 @@ class App extends React.Component {
       isSaveButtonDisabled,
       hasTrunfo,
       cards,
+      // busca,
+      setFilter,
     } = this.state;
     return (
-
       <div>
         <h1>Tryunfo</h1>
         <Form
@@ -139,28 +151,33 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         <h2>SEU DECK</h2>
+        <input
+          type="text"
+          onChange={ this.filterCards }
+          data-testid="name-filter"
+        />
         {
-
-          cards.map((card) => (
-            <section key={ card.name }>
-              <Card
-                cardName={ card.cardName }
-                cardDescription={ card.cardDescription }
-                cardAttr1={ card.cardAttr1 }
-                cardAttr2={ card.cardAttr2 }
-                cardAttr3={ card.cardAttr3 }
-                cardImage={ card.cardImage }
-                cardRare={ card.cardRare }
-                cardTrunfo={ card.cardTrunfo }
-              />
-              <ExcludeCard
-                cardExclude={ () => this.cardExclude(
-                  card.cardName,
-                  card.cardTrunfo,
-                ) }
-              />
-            </section>
-          ))
+          setFilter
+            .map((card) => (
+              <section key={ card.name }>
+                <Card
+                  cardName={ card.cardName }
+                  cardDescription={ card.cardDescription }
+                  cardAttr1={ card.cardAttr1 }
+                  cardAttr2={ card.cardAttr2 }
+                  cardAttr3={ card.cardAttr3 }
+                  cardImage={ card.cardImage }
+                  cardRare={ card.cardRare }
+                  cardTrunfo={ card.cardTrunfo }
+                />
+                <ExcludeCard
+                  cardExclude={ () => this.cardExclude(
+                    card.cardName,
+                    card.cardTrunfo,
+                  ) }
+                />
+              </section>
+            ))
         }
       </div>
     );
