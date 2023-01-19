@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import Form from './components/Form';
 import Card from './components/Card';
+import ExcludeCard from './components/ExcludeCard';
 
 class App extends React.Component {
   state = {
@@ -27,7 +28,6 @@ class App extends React.Component {
   };
 
   saveCard = (event) => {
-    console.log(this.state);
     this.trunfo();
     this.setState((pState) => ({
       cards: [...pState.cards, pState],
@@ -82,6 +82,10 @@ class App extends React.Component {
     });
   };
 
+  cardExclude = (a) => {
+    console.log(a);
+  };
+
   render() {
     const {
       cardName,
@@ -128,18 +132,25 @@ class App extends React.Component {
         />
         <h2>SEU DECK</h2>
         {
+
           cards.map((card) => (
-            <Card
-              key={ card }
-              cardName={ card.cardName }
-              cardDescription={ card.cardDescription }
-              cardAttr1={ card.cardAttr1 }
-              cardAttr2={ card.cardAttr2 }
-              cardAttr3={ card.cardAttr3 }
-              cardImage={ card.cardImage }
-              cardRare={ card.cardRare }
-              cardTrunfo={ card.cardTrunfo }
-            />
+            <section key={ card.name }>
+              <Card
+                cardName={ card.cardName }
+                cardDescription={ card.cardDescription }
+                cardAttr1={ card.cardAttr1 }
+                cardAttr2={ card.cardAttr2 }
+                cardAttr3={ card.cardAttr3 }
+                cardImage={ card.cardImage }
+                cardRare={ card.cardRare }
+                cardTrunfo={ card.cardTrunfo }
+              />
+              <ExcludeCard
+                cardExclude={ () => this.cardExclude(
+                  card,
+                ) }
+              />
+            </section>
           ))
         }
       </div>

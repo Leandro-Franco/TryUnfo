@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { useState } from 'react';
@@ -30,7 +31,6 @@ class Card extends React.Component {
           ? <h2 data-testid="trunfo-card">Super Trunfo</h2>
           : null }
       </section>
-
     );
   }
 }
