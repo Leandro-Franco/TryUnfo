@@ -17,7 +17,6 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
     cards: [],
     hasTrunfo: false,
-    // busca: '',
     setFilter: [],
   };
 
@@ -106,6 +105,40 @@ class App extends React.Component {
     });
   };
 
+  filterRarity = ({ target }) => {
+    const { value } = target;
+    console.log(value);
+    const { cards } = this.state;
+    if (value !== 'todas') {
+      const filterON = cards
+        .filter((card) => card.cardRare === value);
+      this.setState({
+        setFilter: filterON,
+      });
+    } else {
+      this.setState({
+        setFilter: cards,
+      });
+    }
+  };
+
+  filterTrunfo = ({ target }) => {
+    const { checked } = target;
+    console.log(checked);
+    const { cards } = this.state;
+    const filterON = cards
+      .filter((card) => card.cardTrunfo === true);
+    if (checked) {
+      this.setState({
+        setFilter: filterON,
+      });
+    } else {
+      this.setState({
+        setFilter: cards,
+      });
+    }
+  };
+
   render() {
     const {
       cardName,
@@ -118,7 +151,6 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
-      // busca,
       setFilter,
     } = this.state;
     return (
@@ -156,6 +188,29 @@ class App extends React.Component {
           onChange={ this.filterCards }
           data-testid="name-filter"
         />
+
+        <select
+          name="select"
+          data-testid="rare-filter"
+          defaultValue="todas"
+          onClick={ this.filterRarity }
+        >
+          <option value="todas">todas</option>
+          <option value="normal">normal</option>
+          <option value="raro">raro</option>
+          <option value="muito raro">muito raro</option>
+        </select>
+
+        <label htmlFor="checktrunfo">
+          <input
+            id="checktrunfo"
+            type="checkbox"
+            onChange={ this.filterTrunfo }
+            data-testid="trunfo-filter"
+          />
+          checando Trunfo
+        </label>
+
         {
           setFilter
             .map((card) => (
