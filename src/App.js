@@ -117,7 +117,6 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
-      cards,
       // busca,
       setFilter,
     } = this.state;
